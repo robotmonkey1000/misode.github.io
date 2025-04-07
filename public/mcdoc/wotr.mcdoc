@@ -1,5 +1,8 @@
 
 use ::java::data::advancement::predicate::EntityPredicate
+use ::java::data::damage_type::DamageType
+use ::java::util::effect::MobEffectInstance
+use ::java::data::util::WeightedSoundEvent
 
 dispatch minecraft:resource[wotr:ability] to struct AbstractAbility {
 	type: #[id] AbilityTypes,
@@ -13,9 +16,43 @@ enum(string) AbilityTypes {
 	StandardAbility = "wotr:standard_ability"
 }
 
+//EFFECTS
+enum(string) RelativeFrame {
+	absolute = 				"absolute",
+	source_from_target = 	"source_from_target",
+	target_from_source = 	"target_from_source",
+	source_facing = 		"source_facing",
+	source_y_facing = 		"source_y_facing",
+	target_y_facing = 		"target_y_facing"
+}
+
 enum(string) EffectTypes {
-	HealEffect = "wotr:heal_effect",
-	MovementEffect = "wotr:movement_effect"
+	HealEffect = 				"wotr:heal_effect",
+	MovementEffect = 			"wotr:movement_effect",
+	TargetEffect = 				"wotr:target_effect",
+	DamageEffect = 				"wotr:damage_effect",
+	TeleportEffect = 			"wotr:teleport_effect",
+	StatusEffect = 				"wotr:status_effect",
+	BreakEffect = 				"wotr:break_effect",
+	SummonEffect = 				"wotr:summon_effect",
+	ProjectileEffect = 			"wotr:projectile_effect",
+	SimpleProjectileEffect = 	"wotr:simple_projectile_effect",
+	SoundEffect = 				"wotr:sound_effect"
+}
+
+struct TeleportInfo {
+	teleport_target: TeleportTarget,
+	position: [double, double, double],
+	relative?: boolean
+}
+
+
+
+
+
+enum(string) TeleportTarget {
+	user = "user",
+	target = "target"
 }
 
 struct Effect {
@@ -25,15 +62,59 @@ struct Effect {
 	effects: [Effect],
 }
 
+dispatch wotr:effect_type[wotr:sound_effect] to struct SoundEffect {
+	sound: WeightedSoundEvent
+}
+
+dispatch wotr:effect_type[wotr:simple_projectile_effect] to struct SimpleProjectileEffect {
+	config: struct SimpleProjectileConfig {
+		render: struct SimpleProjectileConfigRenderConfig {
+			model: #[id="resource_location"] string,
+			texture: #[id="resource_location"] string,
+			animations: #[id="resource_location"] string
+		},
+		projectiles?: int,
+		velocity: float,
+		gravity_affected?: boolean,
+		gravity?: float,
+		ground_persist_ticks?: int
+	}
+}
+
+dispatch wotr:effect_type[wotr:projectile_effect] to struct ProjectileEffect {
+	entity_type: #[id="resource_location"] string,
+	amount: int
+}
+
+dispatch wotr:effect_type[wotr:summon_effect] to struct SummonEffect {
+	projectile_type: #[id="resource_location"] string,
+	velocity: [double, double, double]
+}
+
+dispatch wotr:effect_type[wotr:damage_effect] to struct DamageEffect {
+	amount: float,
+	damage_type: DamageType
+}
+
+dispatch wotr:effect_type[wotr:status_effect] to struct StatusEffect {
+	status_effect: MobEffectInstance
+}
+
+dispatch wotr:effect_type[wotr:teleport_effect] to struct TeleportEffect {
+	tele_info: TeleportInfo
+}
+
 dispatch wotr:effect_type[wotr:heal_effect] to struct HealEffect {
-	heal_amount: int,
+	amount: float,
 }
 
 
 dispatch wotr:effect_type[wotr:movement_effect] to struct MovementEffect {
-	velocity: [float,float,float]
+	velocity: [float,float,float],
+	relativeFrame?: RelativeFrame
 }
 
+//TARGETING MECHANICS
 enum(string) TargetingTypes {
 	Self = "wotr:self_targeting",
 	Area = "wotr:area_targeting",
@@ -47,7 +128,7 @@ struct Targeting {
 dispatch wotr:targeting_type[wotr:self_targeting] to struct Self {
 }
 
-//TODO implement predicates
+
 dispatch wotr:targeting_type[wotr:area_targeting] to struct Area {
 	target?: TargetPredicate,
 	range: float,
