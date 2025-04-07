@@ -770,6 +770,14 @@
       "dependency": "sky_aesthetics",
       "minVersion": "1.21.1",
       "wiki": "https://github.com/TathanDev/SkyAesthetics/wiki/Custom-Sky"
+    },
+    {
+      "id":"wotr:ability",
+      "url": "wotr/ability",
+      "path": "wotr/ability",
+      "tags": ["partners"],
+      "dependency":"wotr",
+      "wiki": "example.com"
     }
   ],
   "legacyGuides": [

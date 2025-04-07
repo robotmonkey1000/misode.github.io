@@ -1,0 +1,73 @@
+
+use ::java::data::advancement::predicate::EntityPredicate
+
+dispatch minecraft:resource[wotr:ability] to struct AbstractAbility {
+	type: #[id] AbilityTypes,
+	ability_name: #[id="resource_location"] string,
+	icon: #[id="resource_location"] string,
+	cooldown: int,
+	effects: [Effect],
+}
+
+enum(string) AbilityTypes {
+	StandardAbility = "wotr:standard_ability"
+}
+
+enum(string) EffectTypes {
+	HealEffect = "wotr:heal_effect",
+	MovementEffect = "wotr:movement_effect"
+}
+
+struct Effect {
+	type: #[id] EffectTypes,
+	targeting: Targeting,
+	...wotr:effect_type[[type]],
+	effects: [Effect],
+}
+
+dispatch wotr:effect_type[wotr:heal_effect] to struct HealEffect {
+	heal_amount: int,
+}
+
+
+dispatch wotr:effect_type[wotr:movement_effect] to struct MovementEffect {
+	velocity: [float,float,float]
+}
+
+enum(string) TargetingTypes {
+	Self = "wotr:self_targeting",
+	Area = "wotr:area_targeting",
+	Raycast = "wotr:raycast_targeting"
+}
+
+struct Targeting {
+	type: #[id] TargetingTypes,
+	...wotr:targeting_type[[type]]
+}
+dispatch wotr:targeting_type[wotr:self_targeting] to struct Self {
+}
+
+//TODO implement predicates
+dispatch wotr:targeting_type[wotr:area_targeting] to struct Area {
+	target?: TargetPredicate,
+	range: float,
+	include_self?: boolean
+}
+
+dispatch wotr:targeting_type[wotr:raycast_targeting] to struct Raycast {
+	target?: TargetPredicate,
+	range: float,
+}
+
+struct TargetPredicate {
+	entity?: EntityPredicate,
+	attitude?: enum(string) EntityAttitude {
+		Any="any",
+		Friend="friend",
+		NotFriend="not_friend",
+		Neutral="neutral",
+		NotFoe="not_foe",
+		Foe="foe"
+	},
+	exclude_caster?: boolean
+}
