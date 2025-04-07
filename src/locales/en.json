@@ -88,6 +88,7 @@
   "generator.lang": "Language",
   "generator.loot_table": "Loot Table",
   "generator.model": "Model",
+  "generator.wotr:ability": "Ability",
   "generator.neoforge:biome_modifier": "Biome Modifier",
   "generator.neoforge:data_map_compostables": "Compostables Data Map",
   "generator.neoforge:data_map_furnace_fuels": "Furnace Fuels Data Map",
