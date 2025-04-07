@@ -1,11 +1,8 @@
 import { useMemo } from 'preact/hooks'
 import supporters from '../../supporters.json'
-import { Card, ChangelogEntry, Footer, GeneratorCard, ToolCard, ToolGroup } from '../components/index.js'
-import { WhatsNewTime } from '../components/whatsnew/WhatsNewTime.jsx'
+import { Footer, GeneratorCard, ToolCard, ToolGroup } from '../components/index.js'
 import { useLocale, useTitle } from '../contexts/index.js'
-import { useAsync } from '../hooks/useAsync.js'
 import { useMediaQuery } from '../hooks/useMediaQuery.js'
-import { fetchChangelogs, fetchVersions, fetchWhatsNew } from '../services/DataFetcher.js'
 import { Store } from '../Store.js'
 
 const MIN_FAVORITES = 2
@@ -72,81 +69,81 @@ function FavoriteGenerators() {
 	</ToolGroup>
 }
 
-function Tools() {
-	const { locale } = useLocale()
+// function Tools() {
+// 	const { locale } = useLocale()
 
-	return <ToolGroup title={locale('tools')}>
-		<ToolCard title="Converter" icon="convert"
-			link="/convert/"
-			desc="Turn /give commands into loot tables" />
-		<ToolCard title="Customized Worlds" icon="customized"
-			link="/customized/"
-			desc="Create data packs to customize your world" />
-		<ToolCard title="Report Inspector" icon="report"
-			link="https://misode.github.io/report/"
-			desc="Analyse your performance reports" />
-		<ToolCard title="Minecraft Sounds" icon="sounds"
-			link="/sounds/"
-			desc="Browse through and mix all the vanilla sounds" />
-		<ToolCard title="Transformation preview"
-			link="/transformation/"
-			desc="Visualize transformations for display entities" />
-		<ToolCard title="Template Placer"
-			link="https://misode.github.io/template-placer/"
-			desc="Automatically place all the structure pieces in your world" />
-	</ToolGroup>
-}
+// 	return <ToolGroup title={locale('tools')}>
+// 		<ToolCard title="Converter" icon="convert"
+// 			link="/convert/"
+// 			desc="Turn /give commands into loot tables" />
+// 		<ToolCard title="Customized Worlds" icon="customized"
+// 			link="/customized/"
+// 			desc="Create data packs to customize your world" />
+// 		<ToolCard title="Report Inspector" icon="report"
+// 			link="https://misode.github.io/report/"
+// 			desc="Analyse your performance reports" />
+// 		<ToolCard title="Minecraft Sounds" icon="sounds"
+// 			link="/sounds/"
+// 			desc="Browse through and mix all the vanilla sounds" />
+// 		<ToolCard title="Transformation preview"
+// 			link="/transformation/"
+// 			desc="Visualize transformations for display entities" />
+// 		<ToolCard title="Template Placer"
+// 			link="https://misode.github.io/template-placer/"
+// 			desc="Automatically place all the structure pieces in your world" />
+// 	</ToolGroup>
+// }
 
-function Versions() {
-	const { locale } = useLocale()
+// function Versions() {
+// 	const { locale } = useLocale()
 
-	const { value: versions } = useAsync(fetchVersions, [])
-	const release = useMemo(() => versions?.find(v => v.type === 'release'), [versions])
+// 	const { value: versions } = useAsync(fetchVersions, [])
+// 	const release = useMemo(() => versions?.find(v => v.type === 'release'), [versions])
 
-	return <ToolGroup title={locale('versions.minecraft_versions')} link="/versions/" titleIcon="arrow_right">
-		{(versions?.[0] && release) && <>
-			{versions[0].id !== release.id && (
-				<ToolCard title={versions[0].name} link={`/versions/?id=${versions[0].id}`} desc={locale('versions.latest_snapshot')} />
-			)}
-			<ToolCard title={release.name} link={`/versions/?id=${release.id}`} desc={locale('versions.latest_release')} />
-		</>}
-	</ToolGroup>
-}
+// 	return <ToolGroup title={locale('versions.minecraft_versions')} link="/versions/" titleIcon="arrow_right">
+// 		{(versions?.[0] && release) && <>
+// 			{versions[0].id !== release.id && (
+// 				<ToolCard title={versions[0].name} link={`/versions/?id=${versions[0].id}`} desc={locale('versions.latest_snapshot')} />
+// 			)}
+// 			<ToolCard title={release.name} link={`/versions/?id=${release.id}`} desc={locale('versions.latest_release')} />
+// 		</>}
+// 	</ToolGroup>
+// }
 
-function Changelog() {
-	const { locale } = useLocale()
+// function Changelog() {
+// 	const { locale } = useLocale()
 
-	const hugeScreen = useMediaQuery('(min-width: 960px)')
+// 	const hugeScreen = useMediaQuery('(min-width: 960px)')
 
-	const { value: changes } = useAsync(fetchChangelogs, [])
-	const latestChanges = useMemo(() => {
-		return changes
-			?.sort((a, b) => b.order - a.order)
-			.filter(c => !(c.tags.includes('pack') && c.tags.includes('breaking')))
-			.slice(0, 2)
-	}, [changes])
+// 	const { value: changes } = useAsync(fetchChangelogs, [])
+// 	const latestChanges = useMemo(() => {
+// 		return changes
+// 			?.sort((a, b) => b.order - a.order)
+// 			.filter(c => !(c.tags.includes('pack') && c.tags.includes('breaking')))
+// 			.slice(0, 2)
+// 	}, [changes])
 
-	return <ToolGroup title={locale('changelog')} link="/changelog/" titleIcon="git_commit">
-		{latestChanges?.map(change => <ChangelogEntry minimal={!hugeScreen} short={true} change={change} />)}
-	</ToolGroup>
-}
+// 	return <ToolGroup title={locale('changelog')} link="/changelog/" titleIcon="git_commit">
+// 		{latestChanges?.map(change => <ChangelogEntry minimal={!hugeScreen} short={true} change={change} />)}
+// 	</ToolGroup>
+// }
 
-function WhatsNew() {
-	const { locale } = useLocale()
+// function WhatsNew() {
+// 	const { locale } = useLocale()
 
-	const { value: items } = useAsync(fetchWhatsNew)
+// 	const { value: items } = useAsync(fetchWhatsNew)
 
-	return <ToolGroup title={locale('whats_new')} link="/whats-new/" titleIcon="megaphone">
-		{items?.slice(0, 3).map(item => <Card link="/whats-new/" overlay={<WhatsNewTime item={item} short={true} />}>{item.title}</Card>)}
-	</ToolGroup>
-}
+// 	return <ToolGroup title={locale('whats_new')} link="/whats-new/" titleIcon="megaphone">
+// 		{items?.slice(0, 3).map(item => <Card link="/whats-new/" overlay={<WhatsNewTime item={item} short={true} />}>{item.title}</Card>)}
+// 	</ToolGroup>
+// }
 
-function Contributors() {
-	return <div class="contributors">
-		<h3>Supporters</h3>
-		<ContributorsList list={supporters} large />
-	</div>
-}
+// function Contributors() {
+// 	return <div class="contributors">
+// 		<h3>Supporters</h3>
+// 		<ContributorsList list={supporters} large />
+// 	</div>
+// }
 
 interface ContributorsListProps {
 	list: typeof supporters
