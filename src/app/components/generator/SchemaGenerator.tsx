@@ -384,7 +384,7 @@ export function SchemaGenerator({ gen, allowedVersions }: Props) {
 
 	return <>
 		<main class={`${previewShown ? 'has-preview' : ''} ${projectShown ? 'has-project' : ''}`} style={`--project-panel-width: ${realPanelWidth}px`}>
-			{!gen.tags?.includes('partners') && <Ad id="data-pack-generator" type="text" />}
+			{!gen.tags?.includes('partners') && <Ad/>}
 			<div class="controls generator-controls">
 				{gen.wiki && <a class="btn btn-link tooltipped tip-se" aria-label={locale('learn_on_the_wiki')} href={gen.wiki} target="_blank">
 					{Octicon.mortar_board}
@@ -406,7 +406,7 @@ export function SchemaGenerator({ gen, allowedVersions }: Props) {
 			{docError
 				? <ErrorPanel error={docError} />
 				: <FileView docAndNode={docLoading ? undefined : docAndNode} />}
-			<Footer donate={!gen.tags?.includes('partners')} />
+			<Footer />
 		</main>
 		<div class="popup-actions right-actions" style={`--offset: -${8 + actionsShown * 50}px;`}>
 			<div class={`popup-action action-preview${hasPreview ? ' shown' : ''} tooltipped tip-nw`} aria-label={locale(previewShown ? 'hide_preview' : 'show_preview')} onClick={togglePreview}>
