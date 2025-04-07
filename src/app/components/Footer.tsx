@@ -2,10 +2,10 @@ import { useLocale } from '../contexts/index.js'
 import { SOURCE_REPO_URL } from '../Utils.js'
 import { Octicon } from './index.js'
 
-interface Props {
-	donate?: boolean,
-}
-export function Footer({ donate }: Props) {
+// interface Props {
+// 	donate?: boolean,
+// }
+export function Footer() {
 	const { locale } = useLocale()
 
 	return <footer>
