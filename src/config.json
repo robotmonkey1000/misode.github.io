@@ -648,136 +648,32 @@
       "wiki": "https://minecraft.wiki/w/Shader#Post-processing_effects"
     },
     {
-      "id": "fabric:fabric_mod_json",
-      "url": "fabric/fabric-mod-json",
-      "noPath": true,
-      "tags": ["partners"],
-      "dependency": "fabric",
-      "wiki": "https://wiki.fabricmc.net/documentation:fabric_mod_json"
-    },
-    {
-      "id": "immersive_weathering:block_growth",
-      "url": "immersive-weathering/block-growth",
-      "path": "block_growths",
-      "tags": ["partners"],
-      "dependency": "immersive_weathering",
-      "minVersion": "1.18.2"
-    },
-    {
-      "id": "neoforge:biome_modifier",
-      "url": "neoforge/biome-modifier",
-      "path": "neoforge/biome_modifier",
-      "tags": ["partners"],
-      "dependency": "neoforge",
-      "minVersion": "1.20.2",
-      "wiki": "https://docs.neoforged.net/docs/worldgen/biomemodifier"
-    },
-    {
-      "id": "neoforge:data_map_compostables",
-      "url": "neoforge/data-map-compostables",
-      "path": "neoforge/data_map_compostables",
-      "tags": ["partners"],
-      "dependency": "neoforge",
-      "minVersion": "1.20.4",
-      "wiki": "https://docs.neoforged.net/docs/resources/server/datamaps/builtin#neoforgecompostables"
-    },
-    {
-      "id": "neoforge:data_map_furnace_fuels",
-      "url": "neoforge/data-map-furnace-fuels",
-      "path": "neoforge/data_map_furnace_fuels",
-      "tags": ["partners"],
-      "dependency": "neoforge",
-      "minVersion": "1.20.4",
-      "wiki": "https://docs.neoforged.net/docs/resources/server/datamaps/builtin#neoforgefurnace_fuels"
-    },
-    {
-      "id": "neoforge:data_map_monster_room_mobs",
-      "url": "neoforge/data-map-monster-room-mobs",
-      "path": "neoforge/data_map_monster_room_mobs",
-      "tags": ["partners"],
-      "dependency": "neoforge",
-      "minVersion": "1.20.6",
-      "wiki": "https://docs.neoforged.net/docs/resources/server/datamaps/builtin#neoforgemonster_room_mobs"
-    },
-    {
-      "id": "neoforge:data_map_oxidizables",
-      "url": "neoforge/data-map-oxidizables",
-      "path": "neoforge/data_map_oxidizables",
-      "tags": ["partners"],
-      "dependency": "neoforge",
-      "minVersion": "1.21",
-      "wiki": "https://docs.neoforged.net/docs/resources/server/datamaps/builtin#neoforgeoxidizables"
-    },
-    {
-      "id": "neoforge:data_map_parrot_imitations",
-      "url": "neoforge/data-map-parrot-imitations",
-      "path": "neoforge/data_map_parrot_imitations",
-      "tags": ["partners"],
-      "dependency": "neoforge",
-      "minVersion": "1.20.4",
-      "wiki": "https://docs.neoforged.net/docs/resources/server/datamaps/builtin#neoforgeparrot_imitations"
-    },
-    {
-      "id": "neoforge:data_map_raid_hero_gifts",
-      "url": "neoforge/data-map-raid-hero-gifts",
-      "path": "neoforge/data_map_raid_hero_gifts",
-      "tags": ["partners"],
-      "dependency": "neoforge",
-      "minVersion": "1.20.4",
-      "wiki": "https://docs.neoforged.net/docs/resources/server/datamaps/builtin#neoforgeraid_hero_gifts"
-    },
-    {
-      "id": "neoforge:data_map_vibration_frequencies",
-      "url": "neoforge/data-map-vibration-frequencies",
-      "path": "neoforge/data_map_vibration_frequencies",
-      "tags": ["partners"],
-      "dependency": "neoforge",
-      "minVersion": "1.20.4",
-      "wiki": "https://docs.neoforged.net/docs/resources/server/datamaps/builtin#neoforgevibration_frequencies"
-    },
-    {
-      "id": "neoforge:data_map_waxables",
-      "url": "neoforge/data-map-waxables",
-      "path": "neoforge/data_map_waxables",
-      "tags": ["partners"],
-      "dependency": "neoforge",
-      "minVersion": "1.21",
-      "wiki": "https://docs.neoforged.net/docs/resources/server/datamaps/builtin#neoforgewaxables"
-    },
-    {
-      "id": "neoforge:structure_modifier",
-      "url": "neoforge/structure-modifier",
-      "path": "neoforge/structure_modifier",
-      "tags": ["partners"],
-      "dependency": "neoforge",
-      "minVersion": "1.20.2",
-      "wiki": "https://github.com/neoforged/NeoForge/blob/1.21.x/src/main/java/net/neoforged/neoforge/common/world/StructureModifiers.java"
-    },
-    {
-      "id": "ohthetreesyoullgrow:configured_feature",
-      "url": "ohthetreesyoullgrow/feature",
-      "path": "ohthetreesyoullgrow/configured_feature",
-      "tags": ["partners"],
-      "dependency": "ohthetreesyoullgrow",
-      "minVersion": "1.20",
-      "wiki": "https://github.com/CorgiTaco/Oh-The-Trees-Youll-Grow/wiki/Generating-Your-Tree-With-Data-Packs!"
-    },
-    {
-      "id": "sky_aesthetics:sky",
-      "url": "sky-aesthetics/sky",
-      "path": "sky_aesthetics",
-      "tags": ["partners", "assets"],
-      "dependency": "sky_aesthetics",
-      "minVersion": "1.21.1",
-      "wiki": "https://github.com/TathanDev/SkyAesthetics/wiki/Custom-Sky"
-    },
-    {
       "id":"wotr:ability",
       "url": "wotr/ability",
       "path": "wotr/ability",
       "tags": ["partners"],
-      "dependency":"wotr",
-      "wiki": "example.com"
+      "dependency":"wotr"
+    },
+    {
+      "id":"wotr:modifier",
+      "url": "wotr/modifier",
+      "path": "wotr/modifier",
+      "tags": ["partners"],
+      "dependency":"wotr"
+    },
+    {
+      "id":"wotr:ability_upgrade",
+      "url": "wotr/ability_upgrade",
+      "path": "wotr/ability_upgrade",
+      "tags": ["partners"],
+      "dependency":"wotr"
+    },
+    {
+      "id":"wotr:runegem_data",
+      "url": "wotr/runegem_data",
+      "path": "wotr/runegem_data",
+      "tags": ["partners"],
+      "dependency":"wotr"
     }
   ],
   "legacyGuides": [

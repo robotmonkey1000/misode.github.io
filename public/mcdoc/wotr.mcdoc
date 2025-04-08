@@ -3,6 +3,8 @@ use ::java::data::advancement::predicate::EntityPredicate
 use ::java::data::damage_type::DamageType
 use ::java::util::effect::MobEffectInstance
 use ::java::data::util::WeightedSoundEvent
+use ::java::util::attribute::AttributeName
+use ::java::util::attribute::AttributeOperation
 
 dispatch minecraft:resource[wotr:ability] to struct AbstractAbility {
 	type: #[id] AbilityTypes,
@@ -45,9 +47,6 @@ struct TeleportInfo {
 	position: [double, double, double],
 	relative?: boolean
 }
-
-
-
 
 
 enum(string) TeleportTarget {
@@ -151,4 +150,87 @@ struct TargetPredicate {
 		Foe="foe"
 	},
 	exclude_caster?: boolean
+}
+
+
+//Modifiers
+dispatch minecraft:resource[wotr:modifier] to struct Modifier {
+	tier: int,
+	modifiers: [ModifierEffect]
+}
+
+struct ModifierEffect {
+	type: #[id] ModifierEffectTypes,
+	...wotr:modifier_effect[[type]]
+}
+
+//Our Attributes go here
+enum(string) WotrAttributeNames {
+	ability_aoe = "wotr:ability_aoe",
+	ability_raw_damage = "ability_raw_damage",
+	ability_cooldown = "ability_cooldown",
+	ability_heal_power = "ability_heal_power",
+	mana_cost = "mana_cost",
+	projectile_spread = "projectile_spread",
+	projectile_count = "projectile_count",
+	projectile_speed = "projectile_speed",
+	max_mana = "max_mana",
+	mana_regen_rate = "mana_regen_rate",
+	mana_degen_rate = "mana_degen_rate",
+}
+
+enum(string) ModifierEffectTypes {
+	AttributeModifierEffect = "wotr:attribute"
+}
+
+dispatch wotr:modifier_effect[wotr:attribute] to struct AttributeModifierEffect {
+	id: #[id="resource_location"] string,
+	attribute: (AttributeName | WotrAttributeNames |),
+	min_roll: double,
+	max_rol: double,
+	operation: AttributeOperation
+}
+
+//Ability Upgrades
+dispatch minecraft:resource[wotr:ability_upgrade] to struct AbilityUpgrade {
+	id: #[id="resource_location"] string,
+	icon: #[id="resource_location"] string,
+	maxCount: int,
+	effects?: [ModifierEffect]
+}
+
+//Rune Gems
+enum(string) RuneGemTier {
+	Raw = "raw",
+	Shaped = "shaped",
+	Cut = "cut",
+	Polished = "polished",
+	Framed = "framed",
+	Unique = "unique"
+}
+
+enum(string) RuneGemShape {
+	Circle = "circle",
+    Square = "square",
+    Triangle = "triangle",
+    Diamond = "diamond",
+    Heart = "heart",
+    Pentagon = "pentagon"
+}
+
+struct ModifierGroup {
+	supported_items: (
+		#[id(registry="item", tags="allowed")] string |
+		[#[id="item"] string] |
+	),
+	modifiers: (
+		#[id(registry="wotr:modifier", tags="allowed")] string |
+		[#[id="wotr:modifier"] string] |
+	)
+}
+
+dispatch minecraft:resource[wotr:runegem_data] to struct RuneGemData {
+	shape: RuneGemShape,
+	modifier_options: [ModifierGroup],
+	tier: RuneGemTier
 }
