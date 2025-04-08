@@ -167,16 +167,16 @@ struct ModifierEffect {
 //Our Attributes go here
 enum(string) WotrAttributeNames {
 	ability_aoe = "wotr:ability_aoe",
-	ability_raw_damage = "ability_raw_damage",
-	ability_cooldown = "ability_cooldown",
-	ability_heal_power = "ability_heal_power",
-	mana_cost = "mana_cost",
-	projectile_spread = "projectile_spread",
-	projectile_count = "projectile_count",
-	projectile_speed = "projectile_speed",
-	max_mana = "max_mana",
-	mana_regen_rate = "mana_regen_rate",
-	mana_degen_rate = "mana_degen_rate",
+	ability_raw_damage = "wotr:ability_raw_damage",
+	ability_cooldown = "wotr:ability_cooldown",
+	ability_heal_power = "wotr:ability_heal_power",
+	mana_cost = "wotr:mana_cost",
+	projectile_spread = "wotr:projectile_spread",
+	projectile_count = "wotr:projectile_count",
+	projectile_speed = "wotr:projectile_speed",
+	max_mana = "wotr:max_mana",
+	mana_regen_rate = "wotr:mana_regen_rate",
+	mana_degen_rate = "wotr:mana_degen_rate",
 }
 
 enum(string) ModifierEffectTypes {
